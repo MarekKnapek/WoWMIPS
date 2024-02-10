@@ -346,7 +346,7 @@ DWORD MemoryMapPE_FixImports(BYTE *pImageBase, IMAGE_NT_HEADERS32 *pImageNtHeade
 				{
 					return 1;
 				}
-				pCurrThunkData->u1.Function = (DWORD*)dwTranslatedFunctionAddress;
+				pCurrThunkData->u1.Function = dwTranslatedFunctionAddress;
 
 				// update thunk offset
 				dwCurrThunkOffset += sizeof(IMAGE_THUNK_DATA);
