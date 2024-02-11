@@ -273,7 +273,7 @@ DWORD CPU_DecodeInstruction(DWORD dwInstruction, CpuStateStruct *pCpuState, Deco
 
 DWORD CPU_PrintInstruction(DecodedInstructionStruct *pDecodedInstruction, CpuStateStruct *pCpuState)
 {
-	printf("%08X: ", pCpuState->pInstructionPtr);
+	printf("%08X: ", ((unsigned)(((uintptr_t)(pCpuState->pInstructionPtr)))));
 
 	if(pDecodedInstruction->pOpcodeType->dwOpcodeIndex == NATIVECALL_OPCODE)
 	{
@@ -335,7 +335,7 @@ DWORD CPU_Error(CpuStateStruct *pCpuState)
 			printf("Error: Unknown failure\n");
 		}
 
-		printf("\n  ip = 0x%08X\n", pCpuState->pInstructionPtr);
+		printf("\n  ip = 0x%08X\n", ((unsigned)(((uintptr_t)(pCpuState->pInstructionPtr)))));
 		if(ValidatePtrRead(pCpuState->pInstructionPtr, sizeof(DWORD)) == 0)
 		{
 			// read current instruction from memory
