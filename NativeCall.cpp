@@ -210,14 +210,14 @@ DWORD NativeCall_ExecuteFunction(CpuStateStruct *pCpuState, char *pFunctionName,
 	}
 
 	// get function params
-	pStackParamList = (BYTE*)(pCpuState->dwRegister[CPU_GetRegisterIndexByName("sp")] + STACK_HOME_SPACE_BYTES);
+	pStackParamList = (BYTE*)(pCpuState->dwRegister[wow_mips_register_e_sp] + STACK_HOME_SPACE_BYTES);
 	memset((void*)&dwParamValues, 0, sizeof(dwParamValues));
 	for(DWORD i = 0; i < NATIVECALL_PARAM_COUNT; i++)
 	{
 		if(i < 4)
 		{
 			// first 4 params are stored in registers a0-a3
-			dwParamValues[i] = pCpuState->dwRegister[CPU_GetRegisterIndexByName("a0") + i];
+			dwParamValues[i] = pCpuState->dwRegister[wow_mips_register_e_a0 + i];
 		}
 		else
 		{
@@ -262,10 +262,10 @@ DWORD NativeCall_ExecuteFunction(CpuStateStruct *pCpuState, char *pFunctionName,
 	strncpy(pCpuThreadData->szCurrNativeCall, szStoredCurrNativeCall, sizeof(pCpuThreadData->szCurrNativeCall) - 1);
 
 	// set return value
-	pCpuState->dwRegister[CPU_GetRegisterIndexByName("v0")] = dwReturnValue;
+	pCpuState->dwRegister[wow_mips_register_e_v0] = dwReturnValue;
 
 	// update instruction ptr to return address
-	pCpuState->pInstructionPtr = (BYTE*)pCpuState->dwRegister[CPU_GetRegisterIndexByName("ra")];
+	pCpuState->pInstructionPtr = (BYTE*)pCpuState->dwRegister[wow_mips_register_e_ra];
 	pCpuState->dwAdvanceInstructionPointer = 0;
 
 	return 0;

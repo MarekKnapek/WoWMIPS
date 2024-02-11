@@ -120,7 +120,7 @@ DWORD ExecuteInstruction_BLTZAL(CpuStateStruct *pCpuState, DecodedInstructionStr
 		dwConditionMet = 1;
 	}
 
-	ExecuteInstructionUtils_Branch(pCpuState, pDecodedInstruction, dwConditionMet, CPU_GetRegisterIndexByName("ra"), 0);
+	ExecuteInstructionUtils_Branch(pCpuState, pDecodedInstruction, dwConditionMet, wow_mips_register_e_ra, 0);
 
 	return 0;
 }
@@ -134,7 +134,7 @@ DWORD ExecuteInstruction_BLTZALL(CpuStateStruct *pCpuState, DecodedInstructionSt
 		dwConditionMet = 1;
 	}
 
-	ExecuteInstructionUtils_Branch(pCpuState, pDecodedInstruction, dwConditionMet, CPU_GetRegisterIndexByName("ra"), 1);
+	ExecuteInstructionUtils_Branch(pCpuState, pDecodedInstruction, dwConditionMet, wow_mips_register_e_ra, 1);
 
 	return 0;
 }
@@ -162,7 +162,7 @@ DWORD ExecuteInstruction_BGEZAL(CpuStateStruct *pCpuState, DecodedInstructionStr
 		dwConditionMet = 1;
 	}
 
-	ExecuteInstructionUtils_Branch(pCpuState, pDecodedInstruction, dwConditionMet, CPU_GetRegisterIndexByName("ra"), 0);
+	ExecuteInstructionUtils_Branch(pCpuState, pDecodedInstruction, dwConditionMet, wow_mips_register_e_ra, 0);
 
 	return 0;
 }
@@ -176,7 +176,7 @@ DWORD ExecuteInstruction_BGEZALL(CpuStateStruct *pCpuState, DecodedInstructionSt
 		dwConditionMet = 1;
 	}
 
-	ExecuteInstructionUtils_Branch(pCpuState, pDecodedInstruction, dwConditionMet, CPU_GetRegisterIndexByName("ra"), 1);
+	ExecuteInstructionUtils_Branch(pCpuState, pDecodedInstruction, dwConditionMet, wow_mips_register_e_ra, 1);
 
 	return 0;
 }
@@ -260,7 +260,7 @@ DWORD ExecuteInstruction_JALR(CpuStateStruct *pCpuState, DecodedInstructionStruc
 
 DWORD ExecuteInstruction_JAL(CpuStateStruct *pCpuState, DecodedInstructionStruct *pDecodedInstruction)
 {
-	ExecuteInstructionUtils_Jump(pCpuState, CPU_GetRegisterIndexByName("ra"), (BYTE*)pDecodedInstruction->JFormat.dwAddress);
+	ExecuteInstructionUtils_Jump(pCpuState, wow_mips_register_e_ra, (BYTE*)pDecodedInstruction->JFormat.dwAddress);
 
 	return 0;
 }

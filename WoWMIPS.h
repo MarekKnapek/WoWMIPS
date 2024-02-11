@@ -22,6 +22,43 @@
 
 #define MAX_CPU_THREAD_COUNT 256
 
+enum wow_mips_register_e
+{
+	wow_mips_register_e_zero,
+	wow_mips_register_e_at,
+	wow_mips_register_e_v0,
+	wow_mips_register_e_v1,
+	wow_mips_register_e_a0,
+	wow_mips_register_e_a1,
+	wow_mips_register_e_a2,
+	wow_mips_register_e_a3,
+	wow_mips_register_e_t0,
+	wow_mips_register_e_t1,
+	wow_mips_register_e_t2,
+	wow_mips_register_e_t3,
+	wow_mips_register_e_t4,
+	wow_mips_register_e_t5,
+	wow_mips_register_e_t6,
+	wow_mips_register_e_t7,
+	wow_mips_register_e_s0,
+	wow_mips_register_e_s1,
+	wow_mips_register_e_s2,
+	wow_mips_register_e_s3,
+	wow_mips_register_e_s4,
+	wow_mips_register_e_s5,
+	wow_mips_register_e_s6,
+	wow_mips_register_e_s7,
+	wow_mips_register_e_t8,
+	wow_mips_register_e_t9,
+	wow_mips_register_e_k0,
+	wow_mips_register_e_k1,
+	wow_mips_register_e_gp,
+	wow_mips_register_e_sp,
+	wow_mips_register_e_fp,
+	wow_mips_register_e_ra
+};
+typedef enum wow_mips_register_e wow_mips_register_t;
+
 struct UNICODE_STRING
 {
 	USHORT Length;
@@ -157,7 +194,6 @@ extern BYTE *pGlobal_ImageBase;
 extern DWORD dwGlobal_ImageSize;
 extern IMAGE_NT_HEADERS32 *pGlobal_ImageNtHeader;
 extern DWORD NativeCall_ExecuteFunction(CpuStateStruct *pCpuState, char *pFunctionName, DWORD dwFunctionAddress);
-extern BYTE CPU_GetRegisterIndexByName(const char *pRegisterName);
 extern CpuThreadDataStruct *CPU_GetThreadData();
 extern DWORD CPU_ExecuteSubroutine(BYTE *pFunctionAddress, DWORD *pdwParamList, DWORD dwParamCount, DWORD *pdwReturnValue);
 extern DWORD ExecuteInstruction_NATIVECALL(CpuStateStruct *pCpuState, DecodedInstructionStruct *pDecodedInstruction);

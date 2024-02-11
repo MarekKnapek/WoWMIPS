@@ -118,7 +118,7 @@ DWORD CPU_InitialiseThread()
 	CPU_UnlockThreadList();
 
 	// set initial stack ptr
-	pCpuThreadData->CpuState.dwRegister[CPU_GetRegisterIndexByName("sp")] = (DWORD)pStackData + dwStackSize;
+	pCpuThreadData->CpuState.dwRegister[wow_mips_register_e_sp] = (DWORD)pStackData + dwStackSize;
 
 	return 0;
 }

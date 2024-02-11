@@ -146,20 +146,6 @@ DWORD CPU_SetError(CpuStateStruct *pCpuState, const char *pErrorFormatStr, ...)
 	return 0;
 }
 
-BYTE CPU_GetRegisterIndexByName(const char *pRegisterName)
-{
-	for(DWORD i = 0; i < REGISTER_COUNT; i++)
-	{
-		if(_stricmp(pGlobal_RegisterNames[i], pRegisterName) == 0)
-		{
-			return (BYTE)i;
-		}
-	}
-
-	// register name not found - return 0
-	return 0;
-}
-
 DWORD CPU_DecodeInstruction(DWORD dwInstruction, CpuStateStruct *pCpuState, DecodedInstructionStruct *pDecodedInstruction)
 {
 	DWORD dwOpcodeCount = 0;
@@ -440,7 +426,7 @@ DWORD CPU_Step(CpuStateStruct *pCpuState)
 	}
 
 	// ensure zero register is always 0
-	pCpuState->dwRegister[CPU_GetRegisterIndexByName("zero")] = 0;
+	pCpuState->dwRegister[wow_mips_register_e_zero] = 0;
 
 	// check if the instruction pointer should be increased
 	if(pCpuState->dwAdvanceInstructionPointer != 0)
@@ -470,21 +456,21 @@ DWORD CPU_ExecuteSubroutine(BYTE *pFunctionAddress, DWORD *pdwParamList, DWORD d
 	memcpy((void*)&OrigCpuState, (void*)&pCpuThreadData->CpuState, sizeof(OrigCpuState));
 
 	// reserve 16 bytes "home space" on stack
-	pCpuThreadData->CpuState.dwRegister[CPU_GetRegisterIndexByName("sp")] -= STACK_HOME_SPACE_BYTES;
+	pCpuThreadData->CpuState.dwRegister[wow_mips_register_e_sp] -= STACK_HOME_SPACE_BYTES;
 
 	if(dwParamCount > 4)
 	{
 		// reserve param value space on stack
-		pCpuThreadData->CpuState.dwRegister[CPU_GetRegisterIndexByName("sp")] -= ((dwParamCount - 4) * sizeof(DWORD));
+		pCpuThreadData->CpuState.dwRegister[wow_mips_register_e_sp] -= ((dwParamCount - 4) * sizeof(DWORD));
 	}
 
-	pStackParamList = (BYTE*)(pCpuThreadData->CpuState.dwRegister[CPU_GetRegisterIndexByName("sp")] + STACK_HOME_SPACE_BYTES);
+	pStackParamList = (BYTE*)(pCpuThreadData->CpuState.dwRegister[wow_mips_register_e_sp] + STACK_HOME_SPACE_BYTES);
 	for(DWORD i = 0; i < dwParamCount; i++)
 	{
 		if(i < 4)
 		{
 			// first 4 params are stored in registers a0-a3
-			pCpuThreadData->CpuState.dwRegister[CPU_GetRegisterIndexByName("a0") + i] = pdwParamList[i];
+			pCpuThreadData->CpuState.dwRegister[wow_mips_register_e_a0 + i] = pdwParamList[i];
 		}
 		else
 		{
@@ -500,7 +486,7 @@ DWORD CPU_ExecuteSubroutine(BYTE *pFunctionAddress, DWORD *pdwParamList, DWORD d
 	pCpuThreadData->CpuState.pInstructionPtr = pFunctionAddress;
 
 	// set the return address of the subroutine to 0xFFFFFFFF
-	pCpuThreadData->CpuState.dwRegister[CPU_GetRegisterIndexByName("ra")] = EXEC_SUBROUTINE_RETURN_ADDRESS;
+	pCpuThreadData->CpuState.dwRegister[wow_mips_register_e_ra] = EXEC_SUBROUTINE_RETURN_ADDRESS;
 
 	// execute subroutine
 	for(;;)
@@ -524,7 +510,7 @@ DWORD CPU_ExecuteSubroutine(BYTE *pFunctionAddress, DWORD *pdwParamList, DWORD d
 	}
 
 	// get subroutine return value
-	dwReturnValue = pCpuThreadData->CpuState.dwRegister[CPU_GetRegisterIndexByName("v0")];
+	dwReturnValue = pCpuThreadData->CpuState.dwRegister[wow_mips_register_e_v0];
 
 	// restore original CPU state
 	memcpy((void*)&pCpuThreadData->CpuState, (void*)&OrigCpuState, sizeof(OrigCpuState));
