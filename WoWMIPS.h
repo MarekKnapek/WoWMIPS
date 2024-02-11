@@ -294,8 +294,6 @@ extern CRITICAL_SECTION Global_CpuThreadListCriticalSection;
 extern CpuThreadDataStruct Global_CpuThreadList[MAX_CPU_THREAD_COUNT];
 extern DWORD ExecuteInstructionUtils_Load(CpuStateStruct *pCpuState, BYTE *pMemoryAddr, BYTE bRegisterIndex, DWORD dwLength, DWORD dwSignExtend);
 extern DWORD ExecuteInstructionUtils_Store(CpuStateStruct *pCpuState, BYTE *pMemoryAddr, BYTE bRegisterIndex, DWORD dwLength);
-extern DWORD CPU_ReadMemory(BYTE *pMemoryAddr, DWORD *pdwValue, DWORD dwLength, DWORD dwSignExtend);
-extern DWORD CPU_WriteMemory(BYTE *pMemoryAddr, DWORD dwValue, DWORD dwLength);
 extern DWORD ExecuteInstructionUtils_LoadStoreAtomic(CpuStateStruct *pCpuState, BYTE *pMemoryAddr, BYTE bRegisterIndex, DWORD dwStore);
 extern DWORD CPU_LockThreadList();
 extern DWORD CPU_UnlockThreadList();
