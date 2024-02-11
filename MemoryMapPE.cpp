@@ -247,14 +247,12 @@ DWORD MemoryMapPE_FixImports(BYTE *pImageBase, IMAGE_NT_HEADERS32 *pImageNtHeade
 	IMAGE_IMPORT_DESCRIPTOR *pImageImportDescriptor = NULL;
 	DWORD dwCurrImportBlockOffset = 0;
 	char *pCurrModuleName = NULL;
-	HMODULE hCurrModule = NULL;
 	IMAGE_THUNK_DATA *pBaseFirstThunkData = NULL;
 	IMAGE_THUNK_DATA *pBaseOriginalFirstThunkData = NULL;
 	IMAGE_THUNK_DATA *pCurrThunkData = NULL;
 	IMAGE_THUNK_DATA *pCurrOriginalThunkData = NULL;
 	DWORD dwCurrThunkOffset = 0;
 	IMAGE_IMPORT_BY_NAME *pImageImportByName = NULL;
-	BYTE *pImportedFunctionAddr = NULL;
 	DWORD dwOrdinal = 0;
 	HMODULE hModule = NULL;
 	DWORD dwTargetFunction = 0;

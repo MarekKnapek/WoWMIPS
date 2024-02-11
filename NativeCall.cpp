@@ -169,7 +169,7 @@ DWORD WINAPI NativeCall_ExceptionHandler(EXCEPTION_POINTERS *pExceptionInfo)
 			}
 
 			// continue execution
-			return EXCEPTION_CONTINUE_EXECUTION;
+			return ((DWORD)(EXCEPTION_CONTINUE_EXECUTION));
 		}
 		else
 		{
@@ -184,7 +184,7 @@ DWORD WINAPI NativeCall_ExceptionHandler(EXCEPTION_POINTERS *pExceptionInfo)
 					pExceptionInfo->ContextRecord->Eip = *(DWORD*)(pExceptionInfo->ContextRecord->Eip + sizeof(DWORD));
 
 					// continue execution
-					return EXCEPTION_CONTINUE_EXECUTION;
+					return ((DWORD)(EXCEPTION_CONTINUE_EXECUTION));
 				}
 			}
 		}

@@ -6,6 +6,7 @@ DWORD ExecuteInstruction_NATIVECALL(CpuStateStruct *pCpuState, DecodedInstructio
 {
 	DWORD dwFunctionAddress = 0;
 	char *pFunctionName = NULL;
+	((void)(pDecodedInstruction));
 
 	// get function addr
 	dwFunctionAddress = *(DWORD*)((BYTE*)pCpuState->pInstructionPtr + sizeof(DWORD));

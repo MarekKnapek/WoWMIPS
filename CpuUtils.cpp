@@ -306,13 +306,10 @@ DWORD CPU_PrintInstruction(DecodedInstructionStruct *pDecodedInstruction, CpuSta
 	return 0;
 }
 
-DWORD CPU_Error(CpuStateStruct *pCpuState)
+void CPU_Error(CpuStateStruct *pCpuState)
 {
 	DecodedInstructionStruct DecodedInstruction;
 	DWORD dwCurrInstruction = 0;
-	DWORD dwOpcode = 0;
-	DWORD dwRFuncIndex = 0;
-	DWORD dwRegImmFuncIndex = 0;
 
 	printf("\n\n");
 	printf("***********************\n");
@@ -362,8 +359,6 @@ DWORD CPU_Error(CpuStateStruct *pCpuState)
 
 	// terminate process
 	ExitProcess(1);
-
-	return 0;
 }
 
 DWORD CPU_Step(CpuStateStruct *pCpuState)

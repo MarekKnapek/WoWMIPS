@@ -304,7 +304,7 @@ extern DWORD ValidatePtrExec(BYTE *pMemory, DWORD dwLength);
 extern DWORD ExecuteInstructionUtils_Divide(CpuStateStruct *pCpuState, BYTE bRegisterIndex1, BYTE bRegisterIndex2, DWORD dwSigned);
 extern DWORD ExecuteInstructionUtils_Multiply(CpuStateStruct *pCpuState, BYTE bRegisterIndex1, BYTE bRegisterIndex2, DWORD dwSigned);
 extern DWORD CPU_SetError(CpuStateStruct *pCpuState, const char *pErrorFormatStr, ...);
-extern DWORD CPU_Error(CpuStateStruct *pCpuState);
+extern void CPU_Error(CpuStateStruct *pCpuState);
 extern LDR_DATA_TABLE_ENTRY *GetPebLdrDataTableEntry(BYTE *pModuleBase);
 extern PEB *GetPeb();
 extern DWORD CheckAddressInModule(const char *pModuleName, BYTE *pAddress);
